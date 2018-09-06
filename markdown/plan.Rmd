@@ -1,0 +1,111 @@
+---
+title: "Planned Simulations"
+author: "Adam Howes"
+date: "6 August 2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+In all experiments the sample size for the calibration is to 20,000 and the sample size for the observation is to be 500. The number of replications of the dose estimation will be 10,000.
+
+# Non-parametric simulations
+## Full body
+
+Using the Barquniero et al. 1997 table one data
+
+```{r echo = FALSE}
+barquinero1 <- read.csv("data/1997_barquinero.csv")
+```
+
+```{r}
+barquinero1
+```
+
+the quasi-optimal experimental designs
+
+```{r echo = FALSE}
+qI500 <- readRDS("data/1997_qI500.Rds")
+qI50 <- readRDS("data/1997_qI50.Rds")
+qca1 <- readRDS("data/1997_qca1.Rds")
+qD <- readRDS("data/1997_qD.Rds")
+```
+
+```{r}
+qI500; qI50; qca1; qD
+```
+
+will be considered over the range of doses
+
+```{r echo = FALSE}
+d1 <- c(0, 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5)
+```
+
+```{r}
+d1
+```
+
+at 100% irradiation fraction. 
+
+## Partial body
+
+Using the Barquniero et al. 1997 table two data 
+
+```{r echo = FALSE}
+barquinero2 <- read.csv("data/1997_barquinero_partial.csv")
+```
+
+```{r}
+barquinero2
+```
+
+the same designs will also be considered at the doses
+
+```{r echo = FALSE}
+d2 <- c(2, 3, 4, 5)
+```
+
+```{r}
+d2
+```
+
+at the range of irradiation fractions
+
+```{r echo = FALSE}
+f <- c(0.875, 0.75, 0.5, 0.25, 0.125)
+```
+
+```{r}
+f
+```
+
+# Parametric simulations
+
+The optimal experimental designs
+
+```{r echo = FALSE}
+I500 <- readRDS("data/1997_I500.Rds")
+I50 <- readRDS("data/1997_I50.Rds")
+ca1 <- readRDS("data/1997_ca1.Rds")
+D <- readRDS("data/1997_D.Rds")
+```
+
+```{r}
+I500; I50; ca1; D
+```
+
+will be considered at the range of doses
+
+```{r}
+d1
+```
+
+and the range of irradiation fractions
+
+```{r}
+c(1, f)
+```

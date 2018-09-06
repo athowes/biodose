@@ -1,0 +1,132 @@
+---
+title: "Study visualisation"
+author: "Adam Howes"
+date: "28 August 2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r echo=FALSE, message=FALSE}
+library(tidyverse)
+
+sd_table <- read.csv("sd_table.csv")
+
+sd_table$design <- factor(sd_table$design, 
+                          levels = c("classical", "I500", "qI500", "I50", "qI50",
+                                     "ca1", "qca1", "D", "qD"))
+
+frac_plot <- function(s, f) {
+  sd_table %>%
+    filter(simulation == s,
+           irr_frac == f) %>%
+    ggplot(aes(x = dose, y = sd, col = design)) +
+      geom_line(size = 1, alpha = 0.5) +
+      geom_point(size = 3, shape = 1, alpha = 0.9) + 
+      labs(x = "Dose estimate", y = "Standard Deviation",
+           col = "Experimental \nDesign") +
+    theme_minimal()
+}
+```
+
+```{r echo=FALSE, fig.align='center'}
+frac_plot("np", 1) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via non-parametric bootstrap, full-exposure")
+```
+
+```{r echo=FALSE, fig.align='center'}
+frac_plot("p", 1) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, full-exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("np", 0.875) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via non-parametric bootstrap, 87.5% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("p", 0.875) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, 87.5% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("np", 0.75) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations, 75% exposure, non-parametric bootstrap")
+```
+
+```{r echo=FALSE}
+frac_plot("p", 0.75) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, 75% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("np", 0.5) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via non-parametric bootstrap, 50% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("p", 0.5) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, 50% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("np", 0.25) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via non-parametric bootstrap, 25% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("p", 0.25) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, 25% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("np", 0.125) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via non-parametric bootstrap, 12.5% exposure")
+```
+
+```{r echo=FALSE}
+frac_plot("p", 0.125) + 
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, 12.5% exposure")
+```
+
+```{r echo=FALSE, out.extra='angle=90'}
+sd_table %>%
+  filter(simulation == "np") %>%
+  ggplot(aes(x = dose, y = sd, col = design)) +
+  geom_line(size = 1, alpha = 0.5) +
+  geom_point(size = 3, shape = 1, alpha = 0.9) + 
+  facet_grid(. ~ irr_frac) +
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via non-parametric bootstrap, plot faceted by irradiated fraction", 
+       x = "Dose estimate", y = "Standard Deviation", col = "Experimental \nDesign") +
+  theme_minimal()
+```
+
+```{r echo=FALSE, out.extra='angle=90'}
+sd_table %>%
+  filter(simulation == "p") %>%
+  ggplot(aes(x = dose, y = sd, col = design)) +
+  geom_line(size = 1, alpha = 0.5) +
+  geom_point(size = 3, shape = 1, alpha = 0.9) + 
+  facet_grid(. ~ irr_frac) +
+  labs(title = "Standard deviation of simulated dose estimations",
+       subtitle = "10,000 simulations via parametric bootstrap, plot faceted by irradiated fraction", 
+       x = "Dose estimate", y = "Standard Deviation", col = "Experimental \nDesign") +
+  theme_minimal()
+```
