@@ -1,17 +1,3 @@
-# The 1995 dataset
-# dat95 <- read.csv("data/1995_barquinero.csv")
-# 
-# d <- dat95$d
-# m <- dat95$m
-# s <- dat95$s
-# fit <- glm(s ~ m + I(m*d) + I(m*d^2) - 1, 
-#            family = poisson(link = identity), start = c(1, 1, 1))
-# a <- as.numeric(fit$coefficients)
-# Sigma <- matrix(vcov(fit), ncol = 3)
-# 
-# saveRDS(a, "data/1995_a.Rds")
-# saveRDS(Sigma, "data/1995_Sigma.Rds")
-
 # The 1997 dataset (with rings)
 dat97 <- read.csv("data/1997_barquinero.csv")
 
