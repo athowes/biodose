@@ -9,6 +9,7 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "..")
 ```
 
 In all experiments the sample size for the calibration is to 20,000 and the sample size for the observation is to be 500. The number of replications of the dose estimation will be 10,000.
@@ -33,10 +34,11 @@ qI500 <- readRDS("data/1997_qI500.Rds")
 qI50 <- readRDS("data/1997_qI50.Rds")
 qca1 <- readRDS("data/1997_qca1.Rds")
 qD <- readRDS("data/1997_qD.Rds")
+classical <- readRDS("data/classical.Rds")
 ```
 
 ```{r}
-qI500; qI50; qca1; qD
+qI500; qI50; qca1; qD; classical
 ```
 
 will be considered over the range of doses
@@ -49,7 +51,7 @@ d1 <- c(0, 0.1, 0.25, 0.5, 0.75, 1, 1.5, 2, 3, 4, 5)
 d1
 ```
 
-at 100% irradiation fraction. 
+at 100% irradiation fraction. The script for running these simulations is located at *scripts/run_1997_np.R*.
 
 ## Partial body
 
@@ -83,6 +85,8 @@ f <- c(0.875, 0.75, 0.5, 0.25, 0.125)
 f
 ```
 
+The script for running these simulations is located at *scripts/run_1997_zi_np.R*.
+
 # Parametric simulations
 
 The optimal experimental designs
@@ -95,7 +99,7 @@ D <- readRDS("data/1997_D.Rds")
 ```
 
 ```{r}
-I500; I50; ca1; D
+I500; I50; ca1; D; classical
 ```
 
 will be considered at the range of doses
@@ -109,3 +113,5 @@ and the range of irradiation fractions
 ```{r}
 c(1, f)
 ```
+
+The script for running the full-body parametric study is located at *scripts/run_1997_p.R* and for the partial-body is at *scripts/run_1997_zi_p.R*.
