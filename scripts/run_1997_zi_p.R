@@ -1,6 +1,6 @@
 source("functions/zeroinfl_pboot_functions.R")
 
-nsim <- 2500
+nsim <- 10000
 ncal <- 20000
 nobs <- 500
 
