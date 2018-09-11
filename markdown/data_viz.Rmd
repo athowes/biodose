@@ -9,12 +9,13 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "..")
 ```
 
 ```{r echo=FALSE, message=FALSE}
 library(tidyverse)
 
-sd_table <- read.csv("sd_table.csv")
+sd_table <- read.csv("results/sd_table.csv")
 
 sd_table$design <- factor(sd_table$design, 
                           levels = c("classical", "I500", "qI500", "I50", "qI50",
