@@ -41,6 +41,7 @@ zi_npboot_sd %<>%
 
 # Parametric, full body exposure ------------------------------------------
 files <- list.files("results/pboot/", full.names = TRUE)
+files <- files[-6] # Remove simple
 pboot <- lapply(files, readRDS)
 names(pboot) <- gsub("results/pboot/1997_|.Rds", "", files)
 pboot_sd <- lapply(pboot, function(item) {
@@ -61,6 +62,7 @@ pboot_sd %<>%
 # Parametric, partial body exposure ---------------------------------------
 
 files <- list.files("results/zi_pboot/", full.names = TRUE)
+files <- files[-26] # Remove old
 zi_pboot <- lapply(files, readRDS)
 names(zi_pboot) <- gsub("results/zi_pboot/1997_|.Rds", "", files)
 zi_pboot_sd <- lapply(zi_pboot, function(item) {
